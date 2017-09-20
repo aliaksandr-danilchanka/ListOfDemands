@@ -1,0 +1,16 @@
+<resources>
+
+    <style name="TextLarge">
+        <item name="android:textSize">@dimen/text_size_large</item>
+    </style>
+
+
+    <style name="TextSmall">
+        <item name="android:textSize">@dimen/text_size_small</item>
+    </style>
+
+    <style name="TextMedium">
+        <item name="android:textSize">@dimen/text_size_medium</item>
+    </style>
+
+</resources>
