@@ -2,9 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:orientation="vertical"
               android:descendantFocusability="beforeDescendants"
-              android:focusableInTouchMode="true">
+              android:focusableInTouchMode="true"
+              android:orientation="vertical">
 
     <FrameLayout
         android:layout_width="wrap_content"
@@ -21,5 +21,50 @@
             android:background="@drawable/shadow_bottom"
             />
     </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/search_bar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"/>
+    </FrameLayout>
+
+    <RelativeLayout
+        android:id="@+id/view_error"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/image_wifi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_do_not_wifi"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/image_wifi"
+            android:layout_centerInParent="true"
+            android:text="@string/search_error"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/view_no_results"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/search_no_results"/>
+    </LinearLayout>
 
 </LinearLayout>
