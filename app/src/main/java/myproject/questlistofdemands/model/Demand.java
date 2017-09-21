@@ -237,7 +237,7 @@ public class Demand implements Parcelable {
         private String name;
         private boolean isVerified;
         private boolean isHidden;
-        private int rating;
+        private double rating;
         private Object logo;
 
         public int getId() {
@@ -272,11 +272,11 @@ public class Demand implements Parcelable {
             this.isHidden = isHidden;
         }
 
-        public int getRating() {
+        public double getRating() {
             return rating;
         }
 
-        public void setRating(int rating) {
+        public void setRating(double rating) {
             this.rating = rating;
         }
 
