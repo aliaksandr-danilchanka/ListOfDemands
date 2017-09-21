@@ -8,6 +8,7 @@
 
     <string name="date_time_format">yyyy-MM-dd hh:mm:ss.S</string>
     <string name="date_format">dd.M.yyyy</string>
+    <string name="date_format_for_information">dd.M.yyyy, hh:mm</string>
     <string name="day_format">dd</string>
     <string name="hour_format">hh</string>
 
@@ -20,4 +21,8 @@
     <string name="days">dní</string>
     <string name="hours">hodin</string>
     <string name="time_is_end">čas nabídky už vypršel</string>
+
+    <string name="customer">Poptávající</string>
+    <string name="appraisal">Hodnocení:</string>
+    <string name="time_and_place">Čas a místo:</string>
 </resources>

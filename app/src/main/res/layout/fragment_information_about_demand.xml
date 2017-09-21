@@ -1,7 +1,251 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/view_information_about_demand"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_small"
+                android:background="@drawable/background_for_information_item"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:background="@color/colorAccent"
+                        android:padding="@dimen/margin_little"/>
+
+                    <TextView
+                        android:id="@+id/title_of_demand_for_information"
+                        style="@style/TextLarge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/margin_little"
+                        android:textStyle="bold"
+                        tools:text="Sekane travy"/>
+                </LinearLayout>
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/title_information_about_demand"
+                        style="@style/TextMedium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/margin_medium"
+                        tools:text="Sekane travy"/>
+                </FrameLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_small"
+                android:background="@drawable/background_for_information_item"
+                android:orientation="vertical">
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_small">
+
+                    <TextView
+                        style="@style/TextLarge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/margin_little"
+                        android:text="@string/customer"
+                        android:textColor="@color/shadow"
+                        android:textStyle="bold"/>
+                </FrameLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/img_photo_information"
+                        android:layout_width="@dimen/image_width"
+                        android:layout_height="@dimen/image_height"
+                        android:layout_margin="@dimen/margin_small"
+                        android:src="@drawable/ic_fin"/>
+
+                    <TextView
+                        android:id="@+id/name_of_customer"
+                        style="@style/TextMedium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginBottom="@dimen/margin_small"
+                        android:layout_marginTop="@dimen/margin_small"
+                        android:layout_toRightOf="@+id/img_photo_information"
+                        tools:text="Sasha"/>
+
+                    <TextView
+                        android:id="@+id/surname_of_customer"
+                        style="@style/TextMedium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginBottom="@dimen/margin_small"
+                        android:layout_marginLeft="@dimen/margin_little"
+                        android:layout_marginTop="@dimen/margin_small"
+                        android:layout_toRightOf="@+id/name_of_customer"
+                        tools:text="Danilchanka"/>
+
+                    <LinearLayout
+                        android:id="@+id/view_appraisal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/name_of_customer"
+                        android:layout_toRightOf="@+id/img_photo_information"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/TextMedium"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="@dimen/margin_little"
+                            android:text="@string/appraisal"
+                            android:textStyle="bold"/>
+
+                        <TextView
+                            android:id="@+id/appraisal"
+                            style="@style/TextMedium"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            tools:text="Danilchanka"/>
+                    </LinearLayout>
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_small"
+                android:background="@drawable/background_for_information_item"
+                android:orientation="vertical">
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_small">
+
+                    <TextView
+                        style="@style/TextLarge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/margin_little"
+                        android:text="@string/time_and_place"
+                        android:textColor="@color/shadow"
+                        android:textStyle="bold"/>
+                </FrameLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/margin_small">
+
+                        <TextView
+                            android:id="@+id/address"
+                            style="@style/TextMedium"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            tools:text="Danilchanka"/>
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/margin_small"
+                        android:layout_marginLeft="@dimen/margin_small">
+
+                        <RelativeLayout
+                            android:id="@+id/container_for_time"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:id="@+id/date_from_information"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                tools:text="25.08.2017"/>
+
+                            <TextView
+                                android:id="@+id/dash_information"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_toRightOf="@+id/date_from_information"
+                                android:text="@string/dash"/>
+
+                            <TextView
+                                android:id="@+id/date_to_information"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_toRightOf="@+id/dash_information"
+                                tools:text="25.08.2017"/>
+                        </RelativeLayout>
+                    </FrameLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <FrameLayout
+            android:id="@+id/search_bar_information_about_demand"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone">
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"/>
+        </FrameLayout>
+
+        <RelativeLayout
+            android:id="@+id/view_error_information_about_demand"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/image_wifi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_do_not_wifi"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/image_wifi"
+                android:layout_centerInParent="true"
+                android:text="@string/search_error"/>
+        </RelativeLayout>
+    </LinearLayout>
+</ScrollView>
