@@ -1,5 +1,6 @@
 package myproject.questlistofdemands.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,12 +17,15 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import myproject.questlistofdemands.R;
+import myproject.questlistofdemands.activity.InformationAboutDemandActivity;
 import myproject.questlistofdemands.adapter.DemandAdapter;
 import myproject.questlistofdemands.api.RestHelper;
 import myproject.questlistofdemands.model.Demand;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static myproject.questlistofdemands.activity.InformationAboutDemandActivity.ID_DEMAND_KEY;
 
 public class ListOfDemandsFragment extends Fragment {
 
@@ -101,7 +105,14 @@ public class ListOfDemandsFragment extends Fragment {
     }
 
     private void initializeAdapter() {
-        DemandAdapter rvAdapter = new DemandAdapter(mDemands, getContext());
+        DemandAdapter rvAdapter = new DemandAdapter(mDemands, getContext(), new DemandAdapter.OnDemandClickListener() {
+            @Override
+            public void onFilmClicked(Demand demand) {
+                Intent intent = new Intent(getActivity(), InformationAboutDemandActivity.class);
+                intent.putExtra(ID_DEMAND_KEY, demand.getId());
+                startActivity(intent);
+            }
+        });
         mRecyclerView.setAdapter(rvAdapter);
     }
 
