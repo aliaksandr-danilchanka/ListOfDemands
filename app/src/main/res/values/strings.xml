@@ -1,3 +1,21 @@
 <resources>
     <string name="app_name">Quest List Of Demands</string>
+
+    <string name="search_no_results">No results</string>
+    <string name="search_error">You have problem with Internet</string>
+
+    <string name="date_time_format">yyyy-MM-dd hh:mm:ss.S</string>
+    <string name="date_format">dd.M.yyyy</string>
+    <string name="day_format">dd</string>
+    <string name="hour_format">hh</string>
+
+    <string name="dash">" - "</string>
+    <string name="comma">", "</string>
+    <string name="czech_crown">kč</string>
+    <string name="offer">Nabídka</string>
+    <string name="offers">Nabídky</string>
+    <string name="remain">Zbývá</string>
+    <string name="days">dní</string>
+    <string name="hours">hodin</string>
+    <string name="time_is_end">čas nabídky už vypršel</string>
 </resources>
