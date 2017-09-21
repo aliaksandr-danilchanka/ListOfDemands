@@ -4,6 +4,8 @@
     <string name="search_no_results">No results</string>
     <string name="search_error">You have problem with Internet</string>
 
+    <string name="information_about_demand">Information about demand</string>
+
     <string name="date_time_format">yyyy-MM-dd hh:mm:ss.S</string>
     <string name="date_format">dd.M.yyyy</string>
     <string name="day_format">dd</string>
