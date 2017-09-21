@@ -26,12 +26,14 @@ import myproject.questlistofdemands.model.Demand;
 
 public class DemandAdapter extends RecyclerView.Adapter<DemandAdapter.DemandViewHolder> {
 
+    private OnDemandClickListener mOnDemandClickListener;
     private ArrayList<Demand> mDemands;
     private Context mContext;
 
-    public DemandAdapter(ArrayList<Demand> demands, Context context) {
+    public DemandAdapter(ArrayList<Demand> demands, Context context, OnDemandClickListener onDemandClickListener) {
         this.mDemands = demands;
         this.mContext = context;
+        this.mOnDemandClickListener = onDemandClickListener;
     }
 
     @Override
@@ -43,6 +45,12 @@ public class DemandAdapter extends RecyclerView.Adapter<DemandAdapter.DemandView
 
     @Override
     public void onBindViewHolder(DemandViewHolder demandViewHolder, final int i) {
+        demandViewHolder.cv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mOnDemandClickListener.onFilmClicked(mDemands.get(i));
+            }
+        });
         if (mDemands.get(i).getCreator().getPicture().isIsUploaded()) {
             Picasso.with(demandViewHolder.cv.getContext())
                     .load("https://server.qest.cz:44302/api/v1/files/" + mDemands.get(i).getCreator().getPicture().getId() +
@@ -143,6 +151,10 @@ public class DemandAdapter extends RecyclerView.Adapter<DemandAdapter.DemandView
         } catch (ParseException e1) {
             return null;
         }
+    }
+
+    public interface OnDemandClickListener {
+        void onFilmClicked(Demand demand);
     }
 
     static class DemandViewHolder extends RecyclerView.ViewHolder {
