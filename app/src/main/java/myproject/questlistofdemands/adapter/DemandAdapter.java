@@ -11,8 +11,6 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-import org.joda.time.Interval;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -51,11 +49,13 @@ public class DemandAdapter extends RecyclerView.Adapter<DemandAdapter.DemandView
                 mOnDemandClickListener.onFilmClicked(mDemands.get(i));
             }
         });
-        if (mDemands.get(i).getCreator().getPicture().isIsUploaded()) {
-            Picasso.with(demandViewHolder.cv.getContext())
-                    .load("https://server.qest.cz:44302/api/v1/files/" + mDemands.get(i).getCreator().getPicture().getId() +
-                            "/" + mDemands.get(i).getCreator().getPicture().getToken())
-                    .into(demandViewHolder.photoProfile);
+        if (mDemands.get(i).getCreator().getPicture() != null) {
+            if (mDemands.get(i).getCreator().getPicture().isIsUploaded()) {
+                Picasso.with(demandViewHolder.cv.getContext())
+                        .load("https://server.qest.cz:44302/api/v1/files/" + mDemands.get(i).getCreator().getPicture().getId() +
+                                "/" + mDemands.get(i).getCreator().getPicture().getToken())
+                        .into(demandViewHolder.photoProfile);
+            }
         }
         demandViewHolder.dateOfDemand.setText(dateFormat(mDemands.get(i).getCreationUtcTime()));
         demandViewHolder.titleOfDemand.setText(mDemands.get(i).getTitle());
@@ -80,7 +80,8 @@ public class DemandAdapter extends RecyclerView.Adapter<DemandAdapter.DemandView
         if (mDemands.get(i).getBestOffer() == null) {
             demandViewHolder.containerForPrice.setVisibility(View.GONE);
         } else {
-            demandViewHolder.priceOfDemand.setText(String.format("%s", mDemands.get(i).getBestOffer()));
+            demandViewHolder.priceOfDemand.setText(String
+                    .format("%s", (int) Math.round((Double) mDemands.get(i).getBestOffer())));
         }
         if (daysOfEnd(dateFormat(mDemands.get(i).getValidTillUtcTime())) != null) {
             demandViewHolder.daysOfEnd.setText(daysOfEnd(dateFormat(mDemands.get(i).getValidTillUtcTime())).get(0));
@@ -91,19 +92,18 @@ public class DemandAdapter extends RecyclerView.Adapter<DemandAdapter.DemandView
             demandViewHolder.timeView.setVisibility(View.GONE);
             demandViewHolder.timeViewEmpty.setVisibility(View.VISIBLE);
         }
-        if (mDemands.get(i).getOfferCount() > 1) {
-            demandViewHolder.offers.setVisibility(View.VISIBLE);
+        if (mDemands.get(i).getOfferCount() == 0) {
+            demandViewHolder.offers.setVisibility(View.GONE);
             demandViewHolder.offer.setVisibility(View.GONE);
-            demandViewHolder.quantityOfDemands.setText(String.format("%s", mDemands.get(i).getOfferCount()));
-        } else if (mDemands.get(i).getOfferCount() != 0) {
+        } else if (mDemands.get(i).getOfferCount() == 1) {
             demandViewHolder.offers.setVisibility(View.GONE);
             demandViewHolder.offer.setVisibility(View.VISIBLE);
             demandViewHolder.quantityOfDemands.setText(String.format("%s", mDemands.get(i).getOfferCount()));
         } else {
-            demandViewHolder.offers.setVisibility(View.GONE);
+            demandViewHolder.offers.setVisibility(View.VISIBLE);
             demandViewHolder.offer.setVisibility(View.GONE);
+            demandViewHolder.quantityOfDemands.setText(String.format("%s", mDemands.get(i).getOfferCount()));
         }
-
     }
 
     @Override
@@ -119,8 +119,6 @@ public class DemandAdapter extends RecyclerView.Adapter<DemandAdapter.DemandView
     private ArrayList<String> daysOfEnd(String date) {
         ArrayList<String> result = new ArrayList();
         SimpleDateFormat df = new SimpleDateFormat(mContext.getString(R.string.date_format));
-        SimpleDateFormat outputDate = new SimpleDateFormat(mContext.getString(R.string.day_format));
-        SimpleDateFormat outputHour = new SimpleDateFormat(mContext.getString(R.string.hour_format));
         Date nowDay = new Date();
         Date dateOfEnd;
         try {
@@ -129,11 +127,10 @@ public class DemandAdapter extends RecyclerView.Adapter<DemandAdapter.DemandView
             return null;
         }
         if (nowDay.before(dateOfEnd)) {
-            Interval interval = new Interval(nowDay.compareTo(nowDay), dateOfEnd.compareTo(dateOfEnd));
-            String daysOfEnd = outputDate.format(interval);
-            String hoursOfEnd = outputHour.format(interval);
-            result.add(daysOfEnd);
-            result.add(hoursOfEnd);
+            long interval = dateOfEnd.getTime() - nowDay.getTime();
+            result.add(String.format("%s", (int) Math.floor(interval / 1000 / 60 / 60 / 24)));
+            result.add(String.format("%s",
+                    (int) Math.floor((((double) interval / 1000 / 60 / 60 / 24) - (int) Math.floor(interval / 1000 / 60 / 60 / 24)) * 24)));
             return result;
         } else {
             return null;
