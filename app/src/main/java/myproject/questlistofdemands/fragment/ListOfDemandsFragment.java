@@ -30,6 +30,8 @@ import static myproject.questlistofdemands.activity.InformationAboutDemandActivi
 public class ListOfDemandsFragment extends Fragment {
 
     public static final String DEMAND_KEY = "DEMAND_KEY";
+    private static final int COUNT_OF_DEMANDS = 10;
+    private static final int THREAT_SHOT = 5;
 
     @BindView(R.id.recycler_view)
     RecyclerView mRecyclerView;
@@ -41,6 +43,8 @@ public class ListOfDemandsFragment extends Fragment {
     LinearLayout mViewNoResults;
 
     private ArrayList<Demand> mDemands;
+    private int mOffer = 0;
+    private LinearLayoutManager mLinearLayoutManagerForAddScroll;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -49,6 +53,7 @@ public class ListOfDemandsFragment extends Fragment {
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(linearLayoutManager);
+        mLinearLayoutManagerForAddScroll = (LinearLayoutManager) mRecyclerView.getLayoutManager();
         mRecyclerView.setHasFixedSize(true);
         showRecyclerView();
 
@@ -69,6 +74,16 @@ public class ListOfDemandsFragment extends Fragment {
             initializeAdapter();
         }
 
+        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                if (mLinearLayoutManagerForAddScroll.getItemCount() - THREAT_SHOT
+                        == mLinearLayoutManagerForAddScroll.findLastVisibleItemPosition()) {
+                    loadMoreData();
+                }
+            }
+        });
+
         return v;
     }
 
@@ -79,20 +94,20 @@ public class ListOfDemandsFragment extends Fragment {
     }
 
     private void loadData() {
-        RestHelper.getInterface().getDemandList(5, 5).enqueue(new Callback<ArrayList<Demand>>() {
+        RestHelper.getInterface().getDemandList(mOffer, COUNT_OF_DEMANDS).enqueue(new Callback<ArrayList<Demand>>() {
             @Override
             public void onResponse(Call<ArrayList<Demand>> call, Response<ArrayList<Demand>> response) {
                 if (mDemands == null) mDemands = new ArrayList<>();
                 mDemands.clear();
                 mDemands = response.body();
-                if(mDemands != null) {
+                if (mDemands != null) {
                     if (mDemands.isEmpty()) {
                         showNoResultsView();
                     } else {
                         initializeAdapter();
                         showRecyclerView();
                     }
-                }else{
+                } else {
                     showNoResultsView();
                 }
             }
@@ -102,6 +117,29 @@ public class ListOfDemandsFragment extends Fragment {
                 showErrorView();
             }
         });
+    }
+
+    private void loadMoreData() {
+        mOffer += COUNT_OF_DEMANDS;
+        RestHelper.getInterface().getDemandList(mOffer, COUNT_OF_DEMANDS).enqueue(new Callback<ArrayList<Demand>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Demand>> call, Response<ArrayList<Demand>> response) {
+                if (response.body() != null) {
+                    for (int i = 0; i < response.body().size(); i++) {
+                        if (response.body().get(i) != null) {
+                            mDemands.add(response.body().get(i));
+                        }
+                    }
+                    mRecyclerView.getAdapter().notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Demand>> call, Throwable t) {
+                showErrorView();
+            }
+        });
+
     }
 
     private void initializeAdapter() {
