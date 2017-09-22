@@ -115,7 +115,7 @@
                 android:id="@+id/handshake"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/city_of_demand"
+                android:layout_below="@+id/date_from"
                 android:layout_marginLeft="@dimen/margin_small"
                 android:src="@drawable/handshake"/>
 
@@ -124,7 +124,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:layout_below="@+id/city_of_demand"
+                android:layout_below="@+id/date_from"
                 android:layout_marginRight="@dimen/margin_small"
                 android:background="@color/light_shadow"
                 android:orientation="horizontal">
@@ -166,6 +166,7 @@
 
                 <TextView
                     android:id="@+id/offer"
+                    android:visibility="gone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/margin_little"
@@ -175,6 +176,7 @@
 
                 <TextView
                     android:id="@+id/offers"
+                    android:visibility="gone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/margin_little"
