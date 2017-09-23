@@ -23,4 +23,6 @@
     <string name="customer">Poptávající</string>
     <string name="appraisal">Hodnocení:</string>
     <string name="time_and_place">Čas a místo:</string>
+
+    <string name="files_refresh">File is updated</string>
 </resources>

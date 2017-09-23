@@ -3,6 +3,7 @@ package myproject.questlistofdemands.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -41,6 +43,8 @@ public class ListOfDemandsFragment extends Fragment {
     RelativeLayout mViewError;
     @BindView(R.id.view_no_results)
     LinearLayout mViewNoResults;
+    @BindView(R.id.swipe_container)
+    SwipeRefreshLayout mSwipeRefreshLayout;
 
     private ArrayList<Demand> mDemands;
     private int mOffer = 0;
@@ -84,7 +88,22 @@ public class ListOfDemandsFragment extends Fragment {
             }
         });
 
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mOffer = 0;
+                loadData();
+                onItemsLoadComplete();
+            }
+        });
+
+
         return v;
+    }
+
+    void onItemsLoadComplete() {
+        Toast.makeText(getContext(), getString(R.string.files_refresh), Toast.LENGTH_SHORT).show();
+        mSwipeRefreshLayout.setRefreshing(false);
     }
 
     @Override
