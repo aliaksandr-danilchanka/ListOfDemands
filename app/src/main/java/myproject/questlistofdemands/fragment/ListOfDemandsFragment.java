@@ -101,15 +101,15 @@ public class ListOfDemandsFragment extends Fragment {
         return v;
     }
 
-    void onItemsLoadComplete() {
-        Toast.makeText(getContext(), getString(R.string.files_refresh), Toast.LENGTH_SHORT).show();
-        mSwipeRefreshLayout.setRefreshing(false);
-    }
-
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putParcelableArrayList(DEMAND_KEY, mDemands);
+    }
+
+    void onItemsLoadComplete() {
+        Toast.makeText(getContext(), getString(R.string.files_refresh), Toast.LENGTH_SHORT).show();
+        mSwipeRefreshLayout.setRefreshing(false);
     }
 
     private void loadData() {
