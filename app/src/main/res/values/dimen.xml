@@ -8,8 +8,12 @@
     <dimen name="margin_little">4dp</dimen>
     <dimen name="margin_high">32dp</dimen>
     <dimen name="margin_small">8dp</dimen>
-    <dimen name="card_corner_radius">0dp</dimen>
+    <dimen name="oval_margin_bottom">2dp</dimen>
 
     <dimen name="image_width">50dp</dimen>
+    <dimen name="oval_width">10dp</dimen>
+    <dimen name="oval_small_width">4dp</dimen>
     <dimen name="image_height">50dp</dimen>
+    <dimen name="oval_height">10dp</dimen>
+    <dimen name="oval_small_height">4dp</dimen>
 </resources>
