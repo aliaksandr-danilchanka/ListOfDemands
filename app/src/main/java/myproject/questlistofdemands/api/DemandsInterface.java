@@ -8,10 +8,6 @@ import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
-/**
- * Created by Aliaksandr on 9/19/2017.
- */
-
 public interface DemandsInterface {
     @GET("demands")
     Call<ArrayList<Demand>> getDemandList(@Query("offset") int offset, @Query("count") int count);

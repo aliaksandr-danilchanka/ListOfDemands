@@ -1,6 +1,7 @@
 package myproject.questlistofdemands.fragment;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -102,13 +103,13 @@ public class InformationAboutDemandFragment extends Fragment {
     private void loadData() {
         RestHelper.getInterface().getDemandInformation(mIdDemand).enqueue(new Callback<Demand>() {
             @Override
-            public void onResponse(Call<Demand> call, Response<Demand> response) {
+            public void onResponse(@NonNull Call<Demand> call, Response<Demand> response) {
                 mDemand = response.body();
                 initializeData();
             }
 
             @Override
-            public void onFailure(Call<Demand> call, Throwable t) {
+            public void onFailure(@NonNull Call<Demand> call, Throwable t) {
                 showErrorView();
             }
         });

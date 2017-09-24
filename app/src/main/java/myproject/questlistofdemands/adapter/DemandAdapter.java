@@ -37,8 +37,7 @@ public class DemandAdapter extends RecyclerView.Adapter<DemandAdapter.DemandView
     @Override
     public DemandViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_demand, viewGroup, false);
-        DemandViewHolder pvh = new DemandViewHolder(v);
-        return pvh;
+        return new DemandViewHolder(v);
     }
 
     @Override
@@ -106,7 +105,7 @@ public class DemandAdapter extends RecyclerView.Adapter<DemandAdapter.DemandView
         } else {
             demandViewHolder.containerForPrice.setVisibility(View.VISIBLE);
             demandViewHolder.priceOfDemand.setText(String
-                    .format("%s", (int) Math.round((Double) mDemands.get(i).getBestOffer())));
+                    .format("%d", (int) Math.round((Double) mDemands.get(i).getBestOffer())));
         }
         if (daysOfEnd(dateFormat(mDemands.get(i).getValidTillUtcTime())) != null) {
             demandViewHolder.daysOfEnd.setText(daysOfEnd(dateFormat(mDemands.get(i).getValidTillUtcTime())).get(0));
@@ -125,12 +124,12 @@ public class DemandAdapter extends RecyclerView.Adapter<DemandAdapter.DemandView
             demandViewHolder.offers.setVisibility(View.GONE);
             demandViewHolder.offer.setVisibility(View.VISIBLE);
             demandViewHolder.quantityOfDemands.setVisibility(View.VISIBLE);
-            demandViewHolder.quantityOfDemands.setText(String.format("%s", mDemands.get(i).getOfferCount()));
+            demandViewHolder.quantityOfDemands.setText(String.format("%d", mDemands.get(i).getOfferCount()));
         } else {
             demandViewHolder.offers.setVisibility(View.VISIBLE);
             demandViewHolder.offer.setVisibility(View.GONE);
             demandViewHolder.quantityOfDemands.setVisibility(View.VISIBLE);
-            demandViewHolder.quantityOfDemands.setText(String.format("%s", mDemands.get(i).getOfferCount()));
+            demandViewHolder.quantityOfDemands.setText(String.format("%d", mDemands.get(i).getOfferCount()));
         }
     }
 
@@ -145,7 +144,7 @@ public class DemandAdapter extends RecyclerView.Adapter<DemandAdapter.DemandView
     }
 
     private ArrayList<String> daysOfEnd(String date) {
-        ArrayList<String> result = new ArrayList();
+        ArrayList result = new ArrayList();
         SimpleDateFormat df = new SimpleDateFormat(mContext.getString(R.string.date_format));
         Date nowDay = new Date();
         Date dateOfEnd;

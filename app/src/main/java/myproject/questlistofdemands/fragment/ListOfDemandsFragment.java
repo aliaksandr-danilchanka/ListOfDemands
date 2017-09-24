@@ -2,6 +2,7 @@ package myproject.questlistofdemands.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -115,7 +116,7 @@ public class ListOfDemandsFragment extends Fragment {
     private void loadData() {
         RestHelper.getInterface().getDemandList(mOffset, COUNT_OF_DEMANDS).enqueue(new Callback<ArrayList<Demand>>() {
             @Override
-            public void onResponse(Call<ArrayList<Demand>> call, Response<ArrayList<Demand>> response) {
+            public void onResponse(@NonNull Call<ArrayList<Demand>> call, Response<ArrayList<Demand>> response) {
                 if (mDemands == null) mDemands = new ArrayList<>();
                 mDemands.clear();
                 mDemands.addAll(response.body());
@@ -132,7 +133,7 @@ public class ListOfDemandsFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<ArrayList<Demand>> call, Throwable t) {
+            public void onFailure(@NonNull Call<ArrayList<Demand>> call, Throwable t) {
                 showErrorView();
             }
         });

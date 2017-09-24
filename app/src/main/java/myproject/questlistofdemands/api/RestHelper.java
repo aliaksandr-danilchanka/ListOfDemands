@@ -7,10 +7,6 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-/**
- * Created by Aliaksandr on 9/19/2017.
- */
-
 public class RestHelper {
 
     private static DemandsInterface sDemandsInterface;
