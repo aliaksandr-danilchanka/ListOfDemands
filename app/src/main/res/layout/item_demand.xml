@@ -59,39 +59,43 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/title_of_demand"
+                android:layout_marginRight="@dimen/margin_little"
                 android:layout_toRightOf="@+id/img_photo"
-                android:orientation="vertical"
-                android:layout_marginRight="@dimen/margin_little">
+                android:orientation="vertical">
 
                 <View
                     android:layout_width="@dimen/oval_width"
                     android:layout_height="@dimen/oval_height"
                     android:layout_gravity="center"
+                    android:layout_marginBottom="@dimen/oval_margin_bottom"
                     android:layout_marginTop="@dimen/margin_little"
                     android:background="@drawable/oval"
-                    android:layout_marginBottom="@dimen/oval_margin_bottom"
                     />
+
                 <View
-                    android:layout_gravity="center"
                     android:layout_width="@dimen/oval_small_width"
                     android:layout_height="@dimen/oval_small_height"
-                    android:background="@drawable/oval"
-                    android:layout_marginBottom="@dimen/oval_margin_bottom"
-                    />
-                <View
                     android:layout_gravity="center"
+                    android:layout_marginBottom="@dimen/oval_margin_bottom"
+                    android:background="@drawable/oval"
+                    />
+
+                <View
                     android:layout_width="@dimen/oval_small_width"
                     android:layout_height="@dimen/oval_small_height"
-                    android:background="@drawable/oval"
-                    android:layout_marginBottom="@dimen/oval_margin_bottom"
-                    />
-                <View
                     android:layout_gravity="center"
+                    android:layout_marginBottom="@dimen/oval_margin_bottom"
+                    android:background="@drawable/oval"
+                    />
+
+                <View
                     android:layout_width="@dimen/oval_small_width"
                     android:layout_height="@dimen/oval_small_height"
-                    android:background="@drawable/oval"
+                    android:layout_gravity="center"
                     android:layout_marginBottom="@dimen/oval_margin_bottom"
+                    android:background="@drawable/oval"
                     />
+
                 <View
                     android:layout_width="@dimen/oval_width"
                     android:layout_height="@dimen/oval_height"
@@ -101,9 +105,9 @@
             </LinearLayout>
 
             <RelativeLayout
+                android:id="@+id/view_block_address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/view_block_address"
                 android:layout_below="@+id/title_of_demand"
                 android:layout_toRightOf="@+id/view_oval">
 
@@ -238,6 +242,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/handshake"
+                android:layout_marginBottom="@dimen/margin_medium"
                 android:layout_toRightOf="@+id/view_block"
                 android:orientation="horizontal">
 
@@ -279,6 +284,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/handshake"
+                android:layout_marginBottom="@dimen/margin_medium"
                 android:layout_toRightOf="@+id/view_block">
 
                 <TextView
