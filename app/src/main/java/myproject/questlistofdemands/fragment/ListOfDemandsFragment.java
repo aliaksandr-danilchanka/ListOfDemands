@@ -47,7 +47,7 @@ public class ListOfDemandsFragment extends Fragment {
     SwipeRefreshLayout mSwipeRefreshLayout;
 
     private ArrayList<Demand> mDemands;
-    private int mOffer = 0;
+    private int mOffset = 0;
     private LinearLayoutManager mLinearLayoutManagerForAddScroll;
 
     @Override
@@ -91,7 +91,7 @@ public class ListOfDemandsFragment extends Fragment {
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                mOffer = 0;
+                mOffset = 0;
                 loadData();
                 onItemsLoadComplete();
             }
@@ -113,12 +113,12 @@ public class ListOfDemandsFragment extends Fragment {
     }
 
     private void loadData() {
-        RestHelper.getInterface().getDemandList(mOffer, COUNT_OF_DEMANDS).enqueue(new Callback<ArrayList<Demand>>() {
+        RestHelper.getInterface().getDemandList(mOffset, COUNT_OF_DEMANDS).enqueue(new Callback<ArrayList<Demand>>() {
             @Override
             public void onResponse(Call<ArrayList<Demand>> call, Response<ArrayList<Demand>> response) {
                 if (mDemands == null) mDemands = new ArrayList<>();
                 mDemands.clear();
-                mDemands = response.body();
+                mDemands.addAll(response.body());
                 if (mDemands != null) {
                     if (mDemands.isEmpty()) {
                         showNoResultsView();
@@ -139,8 +139,8 @@ public class ListOfDemandsFragment extends Fragment {
     }
 
     private void loadMoreData() {
-        mOffer += COUNT_OF_DEMANDS;
-        RestHelper.getInterface().getDemandList(mOffer, COUNT_OF_DEMANDS).enqueue(new Callback<ArrayList<Demand>>() {
+        mOffset += COUNT_OF_DEMANDS;
+        RestHelper.getInterface().getDemandList(mOffset, COUNT_OF_DEMANDS).enqueue(new Callback<ArrayList<Demand>>() {
             @Override
             public void onResponse(Call<ArrayList<Demand>> call, Response<ArrayList<Demand>> response) {
                 if (response.body() != null) {
