@@ -1,7 +1,6 @@
 package myproject.questlistofdemands.adapter;
 
 import android.content.Context;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
 import myproject.questlistofdemands.R;
@@ -50,36 +50,61 @@ public class DemandAdapter extends RecyclerView.Adapter<DemandAdapter.DemandView
             }
         });
         if (mDemands.get(i).getCreator().getPicture() != null) {
-            if (mDemands.get(i).getCreator().getPicture().isIsUploaded()) {
+                if (mDemands.get(i).getCreator().getPicture().isIsUploaded()) {
                 Picasso.with(demandViewHolder.cv.getContext())
                         .load("https://server.qest.cz:44302/api/v1/files/" + mDemands.get(i).getCreator().getPicture().getId() +
                                 "/" + mDemands.get(i).getCreator().getPicture().getToken())
                         .into(demandViewHolder.photoProfile);
             }
         }
-        demandViewHolder.dateOfDemand.setText(dateFormat(mDemands.get(i).getCreationUtcTime()));
-        demandViewHolder.titleOfDemand.setText(mDemands.get(i).getTitle());
+        if (mDemands.get(i).getCreationUtcTime() != null) {
+            demandViewHolder.dateOfDemand.setVisibility(View.VISIBLE);
+            demandViewHolder.dateOfDemand.setText(dateFormat(mDemands.get(i).getCreationUtcTime()));
+        } else {
+            demandViewHolder.dateOfDemand.setVisibility(View.GONE);
+        }
+        if (mDemands.get(i).getTitle() != null) {
+            demandViewHolder.titleOfDemand.setVisibility(View.VISIBLE);
+            demandViewHolder.titleOfDemand.setText(mDemands.get(i).getTitle());
+        } else {
+            demandViewHolder.titleOfDemand.setVisibility(View.GONE);
+        }
         if (mDemands.get(i).getAddress().getCity() != null) {
+            demandViewHolder.cityOfDemand.setVisibility(View.VISIBLE);
             demandViewHolder.cityOfDemand.setText(mDemands.get(i).getAddress().getCity()
                     + mContext.getString(R.string.comma));
+        } else {
+            demandViewHolder.cityOfDemand.setVisibility(View.GONE);
         }
         if (mDemands.get(i).getAddress().getZipCode() != null) {
+            demandViewHolder.postcodeOdDemand.setVisibility(View.VISIBLE);
             demandViewHolder.postcodeOdDemand.setText(mDemands.get(i).getAddress().getZipCode()
                     + mContext.getString(R.string.comma));
+        }else{
+            demandViewHolder.postcodeOdDemand.setVisibility(View.GONE);
         }
         if (mDemands.get(i).getAddress().getCountryCode() != null) {
+            demandViewHolder.codeOfTheCountry.setVisibility(View.VISIBLE);
             demandViewHolder.codeOfTheCountry.setText(mDemands.get(i).getAddress().getCountryCode());
+        }else{
+            demandViewHolder.codeOfTheCountry.setVisibility(View.GONE);
         }
-        if (dateFormat(mDemands.get(i).getInterval().getFromUtcTime()) != null &&
-                dateFormat(mDemands.get(i).getInterval().getToUtcTime()) != null) {
+        if (mDemands.get(i).getInterval().getFromUtcTime() != null &&
+                mDemands.get(i).getInterval().getToUtcTime() != null) {
+            demandViewHolder.dateFrom.setVisibility(View.VISIBLE);
+            demandViewHolder.dateTo.setVisibility(View.VISIBLE);
+            demandViewHolder.dash.setVisibility(View.VISIBLE);
             demandViewHolder.dateFrom.setText(dateFormat(mDemands.get(i).getInterval().getFromUtcTime()));
             demandViewHolder.dateTo.setText(dateFormat(mDemands.get(i).getInterval().getToUtcTime()));
         } else {
+            demandViewHolder.dateFrom.setVisibility(View.GONE);
+            demandViewHolder.dateTo.setVisibility(View.GONE);
             demandViewHolder.dash.setVisibility(View.GONE);
         }
         if (mDemands.get(i).getBestOffer() == null) {
             demandViewHolder.containerForPrice.setVisibility(View.GONE);
         } else {
+            demandViewHolder.containerForPrice.setVisibility(View.VISIBLE);
             demandViewHolder.priceOfDemand.setText(String
                     .format("%s", (int) Math.round((Double) mDemands.get(i).getBestOffer())));
         }
@@ -95,13 +120,16 @@ public class DemandAdapter extends RecyclerView.Adapter<DemandAdapter.DemandView
         if (mDemands.get(i).getOfferCount() == 0) {
             demandViewHolder.offers.setVisibility(View.GONE);
             demandViewHolder.offer.setVisibility(View.GONE);
+            demandViewHolder.quantityOfDemands.setVisibility(View.GONE);
         } else if (mDemands.get(i).getOfferCount() == 1) {
             demandViewHolder.offers.setVisibility(View.GONE);
             demandViewHolder.offer.setVisibility(View.VISIBLE);
+            demandViewHolder.quantityOfDemands.setVisibility(View.VISIBLE);
             demandViewHolder.quantityOfDemands.setText(String.format("%s", mDemands.get(i).getOfferCount()));
         } else {
             demandViewHolder.offers.setVisibility(View.VISIBLE);
             demandViewHolder.offer.setVisibility(View.GONE);
+            demandViewHolder.quantityOfDemands.setVisibility(View.VISIBLE);
             demandViewHolder.quantityOfDemands.setText(String.format("%s", mDemands.get(i).getOfferCount()));
         }
     }
@@ -156,24 +184,42 @@ public class DemandAdapter extends RecyclerView.Adapter<DemandAdapter.DemandView
 
     static class DemandViewHolder extends RecyclerView.ViewHolder {
 
-        CardView cv;
+        LinearLayout cv;
+        @BindView(R.id.container_for_price)
         LinearLayout containerForPrice;
+        @BindView(R.id.view_time)
         LinearLayout timeView;
+        @BindView(R.id.view_is_empty)
         LinearLayout timeViewEmpty;
+        @BindView(R.id.date_of_demand)
         TextView dateOfDemand;
+        @BindView(R.id.dash)
         TextView dash;
+        @BindView(R.id.img_photo)
         CircleImageView photoProfile;
+        @BindView(R.id.title_of_demand)
         TextView titleOfDemand;
+        @BindView(R.id.city_of_demand)
         TextView cityOfDemand;
+        @BindView(R.id.postcode_of_demand)
         TextView postcodeOdDemand;
+        @BindView(R.id.code_of_the_country)
         TextView codeOfTheCountry;
+        @BindView(R.id.date_from)
         TextView dateFrom;
+        @BindView(R.id.date_to)
         TextView dateTo;
+        @BindView(R.id.price_of_demand)
         TextView priceOfDemand;
+        @BindView(R.id.quantity_of_demands)
         TextView quantityOfDemands;
+        @BindView(R.id.day_of_end)
         TextView daysOfEnd;
+        @BindView(R.id.hours_of_end)
         TextView hoursOfEnd;
+        @BindView(R.id.offer)
         TextView offer;
+        @BindView(R.id.offers)
         TextView offers;
 
 
@@ -181,24 +227,6 @@ public class DemandAdapter extends RecyclerView.Adapter<DemandAdapter.DemandView
             super(itemView);
             cv = itemView.findViewById(R.id.card_view);
             ButterKnife.bind(this, cv);
-            containerForPrice = itemView.findViewById(R.id.container_for_price);
-            timeView = itemView.findViewById(R.id.view_time);
-            dash = itemView.findViewById(R.id.dash);
-            timeViewEmpty = itemView.findViewById(R.id.view_is_empty);
-            dateOfDemand = itemView.findViewById(R.id.date_of_demand);
-            photoProfile = itemView.findViewById(R.id.img_photo);
-            titleOfDemand = itemView.findViewById(R.id.title_of_demand);
-            cityOfDemand = itemView.findViewById(R.id.city_of_demand);
-            postcodeOdDemand = itemView.findViewById(R.id.postcode_of_demand);
-            codeOfTheCountry = itemView.findViewById(R.id.code_of_the_country);
-            dateFrom = itemView.findViewById(R.id.date_from);
-            dateTo = itemView.findViewById(R.id.date_to);
-            priceOfDemand = itemView.findViewById(R.id.price_of_demand);
-            quantityOfDemands = itemView.findViewById(R.id.quantity_of_demands);
-            daysOfEnd = itemView.findViewById(R.id.day_of_end);
-            hoursOfEnd = itemView.findViewById(R.id.hours_of_end);
-            offer = itemView.findViewById(R.id.offer);
-            offers = itemView.findViewById(R.id.offers);
         }
     }
 }
