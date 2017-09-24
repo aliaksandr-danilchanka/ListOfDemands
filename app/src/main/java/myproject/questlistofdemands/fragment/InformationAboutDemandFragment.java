@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -48,7 +49,7 @@ public class InformationAboutDemandFragment extends Fragment {
     @BindView(R.id.surname_of_customer)
     TextView mSurnameOfCustomer;
     @BindView(R.id.appraisal)
-    TextView mAppraisal;
+    RatingBar mAppraisal;
     @BindView(R.id.address)
     TextView mAddress;
     @BindView(R.id.date_from_information)
@@ -115,13 +116,18 @@ public class InformationAboutDemandFragment extends Fragment {
 
     private void initializeData() {
         if (mDemand.getTitle() != null) {
+            mTitleOfDemand.setVisibility(View.VISIBLE);
             mTitleOfDemand.setText(mDemand.getTitle());
+        }else{
+            mTitleOfDemand.setVisibility(View.GONE);
         }
-        if (mDemand.getCreator().getPicture().isIsUploaded()) {
-            Picasso.with(mV.getContext())
-                    .load("https://server.qest.cz:44302/api/v1/files/" + mDemand.getCreator().getPicture().getId() +
-                            "/" + mDemand.getCreator().getPicture().getToken())
-                    .into(mPhoto);
+        if (mDemand.getCreator().getPicture() != null) {
+            if (mDemand.getCreator().getPicture().isIsUploaded()) {
+                Picasso.with(mV.getContext())
+                        .load("https://server.qest.cz:44302/api/v1/files/" + mDemand.getCreator().getPicture().getId() +
+                                "/" + mDemand.getCreator().getPicture().getToken())
+                        .into(mPhoto);
+            }
         }
         if (mDemand.getCreator().getFirstName() != null) {
             mNameOfCustomer.setText(mDemand.getCreator().getFirstName());
@@ -133,14 +139,14 @@ public class InformationAboutDemandFragment extends Fragment {
         } else {
             mSurnameOfCustomer.setVisibility(View.GONE);
         }
-        mAppraisal.setText(String.format("%s", mDemand.getCustomerCompany().getRating()));
+        mAppraisal.setRating((float) mDemand.getCustomerCompany().getRating());
         if (mDemand.getAddress().getLabel() != null) {
             mAddress.setText(mDemand.getAddress().getLabel());
         } else {
             mAddress.setVisibility(View.GONE);
         }
-        if (dateFormat(mDemand.getInterval().getFromUtcTime()) != null &&
-                dateFormat(mDemand.getInterval().getToUtcTime()) != null) {
+        if (mDemand.getInterval().getFromUtcTime() != null &&
+                mDemand.getInterval().getToUtcTime() != null) {
             mDateFrom.setText(dateFormat(mDemand.getInterval().getFromUtcTime()));
             mDateTo.setText(dateFormat(mDemand.getInterval().getToUtcTime()));
         } else {
