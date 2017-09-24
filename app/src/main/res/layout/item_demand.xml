@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/card_view"
-    app:cardCornerRadius="@dimen/card_corner_radius"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/margin_small"
-    android:layout_marginTop="@dimen/margin_small"
     android:clickable="true"
-    android:foreground="?attr/selectableItemBackground">
+    android:foreground="?attr/selectableItemBackground"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -42,7 +39,7 @@
                 android:id="@+id/img_photo"
                 android:layout_width="@dimen/image_width"
                 android:layout_height="@dimen/image_height"
-                android:layout_margin="@dimen/margin_small"
+                android:layout_margin="@dimen/margin_medium"
                 android:src="@drawable/ic_fin"/>
 
             <TextView
@@ -52,54 +49,106 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_marginBottom="@dimen/margin_medium"
-                android:layout_marginTop="@dimen/margin_small"
+                android:layout_marginTop="@dimen/margin_medium"
                 android:layout_toRightOf="@+id/img_photo"
                 android:textStyle="bold"
                 tools:text="Sekane travy"/>
 
-            <TextView
-                android:id="@+id/city_of_demand"
-                style="@style/TextSmall"
+            <LinearLayout
+                android:id="@+id/view_oval"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/title_of_demand"
-                android:layout_marginBottom="@dimen/margin_small"
                 android:layout_toRightOf="@+id/img_photo"
-                tools:text="Praha 8"/>
+                android:orientation="vertical"
+                android:layout_marginRight="@dimen/margin_little">
 
-            <TextView
-                android:id="@+id/postcode_of_demand"
-                style="@style/TextSmall"
+                <View
+                    android:layout_width="@dimen/oval_width"
+                    android:layout_height="@dimen/oval_height"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/margin_little"
+                    android:background="@drawable/oval"
+                    android:layout_marginBottom="@dimen/oval_margin_bottom"
+                    />
+                <View
+                    android:layout_gravity="center"
+                    android:layout_width="@dimen/oval_small_width"
+                    android:layout_height="@dimen/oval_small_height"
+                    android:background="@drawable/oval"
+                    android:layout_marginBottom="@dimen/oval_margin_bottom"
+                    />
+                <View
+                    android:layout_gravity="center"
+                    android:layout_width="@dimen/oval_small_width"
+                    android:layout_height="@dimen/oval_small_height"
+                    android:background="@drawable/oval"
+                    android:layout_marginBottom="@dimen/oval_margin_bottom"
+                    />
+                <View
+                    android:layout_gravity="center"
+                    android:layout_width="@dimen/oval_small_width"
+                    android:layout_height="@dimen/oval_small_height"
+                    android:background="@drawable/oval"
+                    android:layout_marginBottom="@dimen/oval_margin_bottom"
+                    />
+                <View
+                    android:layout_width="@dimen/oval_width"
+                    android:layout_height="@dimen/oval_height"
+                    android:layout_gravity="center"
+                    android:background="@drawable/oval"
+                    />
+            </LinearLayout>
+
+            <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/view_block_address"
                 android:layout_below="@+id/title_of_demand"
-                android:layout_marginBottom="@dimen/margin_small"
-                android:layout_toRightOf="@+id/city_of_demand"
-                tools:text=" 180 00"/>
+                android:layout_toRightOf="@+id/view_oval">
 
-            <TextView
-                android:id="@+id/code_of_the_country"
-                style="@style/TextSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/title_of_demand"
-                android:layout_marginBottom="@dimen/margin_small"
-                android:layout_toRightOf="@+id/postcode_of_demand"
-                tools:text=" CZ"/>
+                <TextView
+                    android:id="@+id/city_of_demand"
+                    style="@style/TextSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginBottom="@dimen/margin_small"
+
+                    tools:text="Praha 8"/>
+
+                <TextView
+                    android:id="@+id/postcode_of_demand"
+                    style="@style/TextSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/margin_small"
+                    android:layout_toRightOf="@+id/city_of_demand"
+                    tools:text=" 180 00"/>
+
+                <TextView
+                    android:id="@+id/code_of_the_country"
+                    style="@style/TextSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/margin_small"
+                    android:layout_toRightOf="@+id/postcode_of_demand"
+                    tools:text=" CZ"/>
+            </RelativeLayout>
 
             <TextView
                 android:id="@+id/date_from"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/city_of_demand"
-                android:layout_toRightOf="@+id/img_photo"
+                android:layout_below="@+id/view_block_address"
+                android:layout_toRightOf="@+id/view_oval"
                 tools:text="25.08.2017"/>
 
             <TextView
                 android:id="@+id/dash"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/city_of_demand"
+                android:layout_below="@+id/view_block_address"
                 android:layout_toRightOf="@+id/date_from"
                 android:text="@string/dash"/>
 
@@ -107,7 +156,7 @@
                 android:id="@+id/date_to"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/city_of_demand"
+                android:layout_below="@+id/view_block_address"
                 android:layout_toRightOf="@+id/dash"
                 tools:text="25.08.2017"/>
 
@@ -116,7 +165,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/date_from"
-                android:layout_marginLeft="@dimen/margin_small"
+                android:layout_marginLeft="@dimen/margin_medium"
                 android:src="@drawable/handshake"/>
 
             <LinearLayout
@@ -125,7 +174,6 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_below="@+id/date_from"
-                android:layout_marginRight="@dimen/margin_small"
                 android:background="@color/light_shadow"
                 android:orientation="horizontal">
 
@@ -155,7 +203,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/handshake"
-                android:layout_marginBottom="@dimen/margin_small"
+                android:layout_marginBottom="@dimen/margin_medium"
                 android:layout_toRightOf="@+id/img_photo">
 
                 <TextView
@@ -166,23 +214,23 @@
 
                 <TextView
                     android:id="@+id/offer"
-                    android:visibility="gone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/margin_little"
                     android:layout_marginRight="@dimen/margin_medium"
                     android:layout_toRightOf="@+id/quantity_of_demands"
-                    android:text="@string/offer"/>
+                    android:text="@string/offer"
+                    android:visibility="gone"/>
 
                 <TextView
                     android:id="@+id/offers"
-                    android:visibility="gone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/margin_little"
                     android:layout_marginRight="@dimen/margin_medium"
                     android:layout_toRightOf="@+id/quantity_of_demands"
-                    android:text="@string/offers"/>
+                    android:text="@string/offers"
+                    android:visibility="gone"/>
             </RelativeLayout>
 
             <LinearLayout
@@ -240,7 +288,11 @@
             </LinearLayout>
 
         </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/shadow"
+            />
     </LinearLayout>
-
-
-</android.support.v7.widget.CardView>
+</LinearLayout>
